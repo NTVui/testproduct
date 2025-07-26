@@ -1,0 +1,154 @@
+/* --- Biến màu và kích thước (dễ tùy chỉnh) --- */
+:root {
+  --sider-width: 220px;
+  --header-height: 60px;
+  --sider-bg: #2d3e50;
+  --sider-text-color: #ecf0f1;
+  --sider-hover-bg: #34495e;
+  --sider-active-bg: #4a90e2;
+  --body-bg: #f4f6f9;
+}
+
+/* --- Cài đặt chung --- */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background-color: var(--body-bg);
+}
+
+/* --- Header --- */
+.header {
+  background-color: #ffffff;
+  padding: 0 30px;
+  height: var(--header-height);
+  border-bottom: 1px solid #dee2e6;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+}
+
+/* --- Layout chính (Sider & Main Content) --- */
+.body {
+  display: flex;
+  padding-top: var(--header-height); /* Đẩy nội dung xuống dưới header */
+}
+
+/* --- Thanh Sider (Menu bên trái) --- */
+.sider {
+  width: var(--sider-width);
+  height: calc(
+    100vh - var(--header-height)
+  ); /* Quan trọng: Chiều cao bằng màn hình trừ đi header */
+  background: var(--sider-bg);
+  padding-top: 20px;
+  position: fixed;
+  left: 0;
+  top: var(--header-height); /* Quan trọng: Bắt đầu ngay dưới header */
+}
+
+/* --- Menu bên trong Sider --- */
+.sider .inner-menu ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.sider .inner-menu a {
+  display: block;
+  color: var(--sider-text-color);
+  text-decoration: none;
+  padding: 14px 25px;
+  font-size: 15px;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.sider .inner-menu a:hover {
+  background: var(--sider-hover-bg);
+}
+
+/* Kiểu cho mục đang được chọn */
+.sider .inner-menu li.active a {
+  background: var(--sider-active-bg);
+  font-weight: bold;
+}
+
+/* --- Vùng Nội Dung Chính --- */
+.main {
+  width: calc(100% - var(--sider-width));
+  margin-left: var(--sider-width);
+  padding: 25px;
+}
+
+/* 🌟 Vùng thông báo hiển thị (mặc định là hiện) */
+[show-alert] {
+  position: fixed;
+  top: 70px;
+  right: 15px;
+  z-index: 9999;
+  transition: all 0.3s ease;
+}
+
+/* ❌ Khi muốn ẩn thông báo: thêm class .alert-hidden */
+[show-alert].alert-hidden {
+  animation-name: alert-hidden;
+  animation-duration: 0.5s;
+  animation-fill-mode: both;
+}
+
+/* 🎬 Keyframe ẩn thông báo (slide ra ngoài và biến mất) */
+@keyframes alert-hidden {
+  from {
+    right: 15px;
+    opacity: 1;
+  }
+  to {
+    right: -100%;
+    opacity: 0;
+    display: none;
+  }
+}
+
+/* 📦 Nút đóng nằm trong alert */
+[show-alert] [close-alert] {
+  background: #ffffffc4;       /* 💡 nền trắng trong suốt một chút */
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  line-height: 24px;           /* 📐 canh chữ theo chiều cao */
+  text-align: center;
+  font-weight: 600;
+  border-radius: 50%;          /* 🎯 tạo hình tròn */
+  cursor: pointer;             /* 🖱️ hiện hình tay khi hover */
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  font-size: 14px;
+  transition: background 0.3s;
+}
+
+/* 🖌️ Hover có hiệu ứng mượt hơn */
+.show-alert [close-alert]:hover {
+  background: #ffcccc;
+}
+
+/* 🌄 Image Preview */
+.image-preview {
+  width: 150px;               /* 📏 Kích thước ảnh */
+  height: auto;               /* 🔄 Tự điều chỉnh chiều cao theo tỉ lệ */
+  margin-top: 15px;           /* 📐 Cách phần tử phía trên */
+  border: 1px solid #ddd;     /* 🖼️ Viền xám nhạt */
+  padding: 15px;              /* 📦 Khoảng cách bên trong */
+  border-radius: 5px;         /* 🔘 Bo góc nhẹ */
+}
+
+/* 🕳️ Ẩn ảnh nếu chưa có đường dẫn */
+.image-preview[src=""] {
+  display: none;
+}
+
+

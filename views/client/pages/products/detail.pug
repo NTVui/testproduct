@@ -1,0 +1,47 @@
+extends ../../layouts/default.pug
+
+block main
+  .container.my-3
+    .row
+      .col-12
+
+        // 🧾 Tiêu đề sản phẩm
+        if product.title
+          h1.mb-4 #{product.title}
+
+        // 💵 Giá
+        if product.price
+          div.mb-4
+            span Giá: 
+            b #{product.price}$
+
+        // 📉 Giảm giá
+        if product.discountPercentage
+          div.mb-4
+            span Giảm giá: 
+            b #{product.discountPercentage}%
+
+        // 📦 Số lượng còn lại
+        if product.stock
+          div.mb-4
+            span Còn lại: 
+            b #{product.stock}
+
+        // 🖼️ Hình ảnh
+        if product.thumbnail
+          div.mb-4
+            img(
+              src=product.thumbnail, 
+              style="width: 100px"
+            )
+
+        // 📌 Vị trí
+        if product.position
+          div.mb-4
+            span Vị trí: 
+            b #{product.position}
+
+        // 📝 Mô tả
+        if product.description
+          div.mt-4
+            p #{product.description}
