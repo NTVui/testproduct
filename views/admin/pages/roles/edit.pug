@@ -1,0 +1,31 @@
+extends ../../layouts/default.pug
+include ../../mixins/alert.pug
+
+
+block main
+  h1.mb-4 Chỉnh sửa nhóm quyền
+  +alertError(5000)
+  +alertSuccess(5000)
+ 
+  form(
+    action=`${prefixAdmin}/roles/edit/${data.id}?_method=PATCH`,
+    method='POST'
+    )
+
+    .form-group
+      label(for='title') Tiêu đề
+      input#title.form-control(type='text', name='title',value=data.title, required)
+
+    .form-group
+      label(for='desc') Mô tả
+      textarea#desc.form-control.textarea-tinymce(rows='5', name='description', value=data.description) #{data.description}
+
+   
+
+    div(class="form-group")
+      button.btn.btn-primary(type='submit') Cập nhật
+
+  
+  script(src='/admin/js/product.js')
+
+//- #là id, . là class

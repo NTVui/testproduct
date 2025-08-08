@@ -1,0 +1,8 @@
+mixin formatDateTime(time)
+    span #{moment(time).tz("Asia/Ho_Chi_Minh").format('LLLL')}
+
+mixin formatDate(time)
+    span #{moment(time).tz("Asia/Ho_Chi_Minh").format('MMM Do YY')}
+
+mixin formatTime(time)
+    span #{moment(time).tz("Asia/Ho_Chi_Minh").format('hh:mm:ss')}

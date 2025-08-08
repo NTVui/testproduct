@@ -1,0 +1,76 @@
+extends ../../layouts/default.pug
+include ../../mixins/select-tree.pug
+include ../../mixins/alert.pug
+include ../../mixins/upload-image.pug
+block main
+  h1.mb-4 Chỉnh sửa danh mục sản phẩm
+  +alertSuccess(5000)
+  +alertError(5000)
+  form(
+    action=`${prefixAdmin}/products-category/edit/${data.id}?_method=PATCH`,
+    method='POST',
+    enctype="multipart/form-data"
+    )
+
+    .form-group
+      label(for='title') Tiêu đề
+      input#title.form-control(type='text', name='title', value=data.title required)
+
+    .form-group
+      label(for='parent_id') Danh mục cha
+        //-   input#parent_id.form-control(type='text', name='parent_id')
+
+      select#parent_id.form-control(name="parent_id")
+        option(value="") -- Chọn danh mục cha --
+        if(records)
+          +selectTree(records,1, data.parent_id)
+
+    .form-group
+      label(for='desc') Mô tả
+      textarea#desc.form-control.textarea-tinymce(rows='5', name='description') #{data.description}
+
+    +uploadImagePreview(data.thumbnail, 'thumbnail')
+    //- div(
+    //-   class="form-group"
+    //-   upload-image
+    //-   )
+    //-   label(for='thumbnail') Ảnh
+    //-   input#thumbnail.form-control-file(type='file', name='thumbnail', accept="image/*", upload-image-input)
+    //-   img(src=data.thumbnail, upload-image-preview, class="image-preview")
+    .form-group
+      label(for='position') Vị trí
+      input#position.form-control(
+        type='number',
+        name='position',
+        placeholder='Tự động tăng',
+        min='1',
+        value=data.position
+      )
+
+
+    .form-group.form-check.form-check-inline
+      input#status-active.form-check-input(
+        type='radio',
+        name='status',
+        value='active',
+        checked=(data.status=="active"?true:false)
+      )
+      label.form-check-label(for='status-active') Hoạt động
+
+    .form-group.form-check.form-check-inline
+      input#status-inactive.form-check-input(
+        type='radio',
+        name='status',
+        value='inactive',
+        checked=(data.status=="inactive"?true:false)
+      )
+      label.form-check-label(for='status-inactive') Dừng Hoạt động
+
+    div(class="form-group")
+      button.btn.btn-primary(type='submit') Cập nhật
+  script(src='/admin/js/product.js')
+
+  
+  
+
+

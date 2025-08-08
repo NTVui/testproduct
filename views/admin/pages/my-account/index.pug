@@ -1,0 +1,53 @@
+extends ../../layouts/default.pug
+
+block main
+  .container-fluid
+    .row
+      // 📌 Sidebar (nếu cần — ví dụ hiển thị bằng layout)
+      // #sidebar.col-md-3 (ẩn trong layout.pug)
+
+      // 📄 Thông tin cá nhân
+      #profile-info.col-md-9.mx-auto.mt-4
+        .card.shadow-sm
+          .card-body
+            h1.text-center.mb-4 Thông tin cá nhân
+
+            // 👤 Avatar
+            if (user.avatar)
+              img#avatar(src=user.avatar width="150" class="d-block mx-auto mb-3 rounded-circle border border-2")
+            else
+              img#avatar(src="/admin/images/avatar.png" width="150" class="d-block mx-auto mb-3 rounded-circle border border-2")
+
+            // 🧑‍💼 Họ tên
+            if (user.fullname)
+              p#fullname.fw-bold.mb-2
+                | Họ tên: 
+                b.text-primary= user.fullname
+
+            // ✉️ Email
+            if (user.email)
+              p#email.mb-2
+                | Email: 
+                b.text-secondary= user.email
+
+            // 📞 SĐT
+            if (user.phone)
+              p#phone.mb-2
+                | Số điện thoại: 
+                b.text-secondary= user.phone
+
+            // 🔄 Trạng thái hoạt động
+            p#status.mb-2
+              | Trạng thái: 
+              b.text-success= (user.status === 'active' ? 'Hoạt động' : 'Dừng hoạt động')
+
+            // 🛡 Vai trò
+            if (role.title)
+              p#role.mb-4
+                | Phân quyền: 
+                b.text-warning= role.title
+
+            // ✏️ Nút chỉnh sửa
+            a#edit-profile(href=`${prefixAdmin}/my-account/edit` class="btn btn-primary d-block mx-auto w-25")
+              i.fas.fa-edit.me-2
+              | Chỉnh sửa thông tin

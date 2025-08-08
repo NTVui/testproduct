@@ -48,10 +48,12 @@ block main
     // 📝 Mô tả sản phẩm
     if product.description
         div(class="mt-4")
-        p #{product.description}
+        //- dùng # thì nó hiện kết quả là dạng như này <p>Tiêu đề...</p>
+        //- dùng ! để hiển thị dc HTMl
+        p !{product.description}
 
     a(
         href=`${prefixAdmin}/products/edit/${product.id}`
         class="btn btn-warning"
         ) Chỉnh sửa
-    script(src='/admin/js/product.js')   
+    

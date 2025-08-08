@@ -4,6 +4,9 @@ include ../../mixins/search.pug
 include ../../mixins/pagination.pug
 include ../../mixins/form-change-multi.pug
 include ../../mixins/alert.pug
+include ../../mixins/sort.pug
+include ../../mixins/moment.pug
+
 block main
   +alertSuccess(5000)
   h1 Danh sách sản phẩm
@@ -26,7 +29,16 @@ block main
               href=`${prefixAdmin}/products/create`
               class="btn btn-outline-success"
             ) + Thêm mới
-        
+
+  .card.mb-3
+    .card-header Sắp xếp
+      .card-body
+        .row
+          .col-4
+            
+           +sort()
+
+          
   table(class="table table-hover table-bordered" checkbox-multi
   )
     thead
@@ -39,6 +51,8 @@ block main
         th Giá
         th Vị trí
         th Trạng thái
+        th Người tạo
+        th Người cập nhật
         th Hành động
 
     tbody
@@ -46,7 +60,8 @@ block main
         tr
           td
             input(type='checkbox', name='id', value=item.id) 
-          td #{ index + 1 }
+          
+          td #{pagination.limitItems*(pagination.currentPage - 1)+(index+1)}
           td
             img(src=item.thumbnail, alt=item.title, width='100px')
           td #{ item.title }
@@ -76,7 +91,21 @@ block main
                 button-change-status,
                 class='badge.badge-danger'
               ) Dừng Hoạt động
-
+          td 
+            //- if item.createdBy && item.createdBy.account_id
+            //-   = item.createdBy.account_id
+            //- else
+            //-   | Không xác định
+            p #{item.accountFullName}
+            if(item.createdBy.createdAt)
+              +formatDateTime(item.createdBy.createdAt)
+          
+          td 
+            - var updatedBy = item.updatedBy[item.updatedBy.length-1]
+            if(updatedBy)
+              p #{updatedBy.accountFullName}
+              p 
+                +formatDateTime(updatedBy.updatedAt)
           td
             a.btn.btn-secondary.btn-sm(href=`${prefixAdmin}/products/detail/${item.id}`) Chi tiết
             a.btn.btn-warning.btn-sm(href=`${prefixAdmin}/products/edit/${item.id}`) Sửa

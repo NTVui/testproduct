@@ -26,7 +26,7 @@ module.exports.upload = async (req, res, next) =>{
       next() // Chỉ gọi sau khi upload thành công
     } catch (error) {
       console.error("Upload ảnh thất bại:", error)
-      res.status(500).send("Upload ảnh thất bại")
+      return res.status(500).send("Upload ảnh thất bại")
     }
     } else {
         next() // Nếu không có file thì vẫn tiếp tục

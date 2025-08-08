@@ -1,10 +1,12 @@
 const express = require('express')
+const path = require('path');
 const methodOverride = require('method-override')
 const bodyParser = require('body-parser')
 const flash = require('express-flash')
 const cookieParser = require('cookie-parser')
 const session = require('express-session')
 const database = require('./config/database')
+const moment = require("moment-timezone");
 
 require('dotenv').config()
 
@@ -23,6 +25,9 @@ app.use(methodOverride('_method'))
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
+//TinyMCE
+app.use('/tinymce', express.static(path.join(__dirname, 'node_modules', 'tinymce')));
+
 //Tìm hiểu dirname là gì
 //Có thể là cấu trúc thư mục
 console.log(__dirname)
@@ -37,6 +42,7 @@ app.use(session({ cookie: { maxAge: 60000 } }))
 app.use(flash())
 
 app.locals.prefixAdmin = systemConfig.prefixAdmin
+app.locals.moment = moment
 
 route(app)
 routeAdmin(app)

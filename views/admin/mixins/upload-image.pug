@@ -1,0 +1,24 @@
+mixin uploadImagePreview(imageUrl, inputName)
+  .upload-wrapper
+    label(for=inputName) Ảnh 
+    input.form-control-file(
+      type='file',
+      name=inputName,
+      accept='image/*',
+      id=inputName,
+      upload-image-input
+    ) 
+    if imageUrl
+      .image-preview-wrapper(style="position: relative; display: inline-block;")
+        img(
+          src=imageUrl,
+          class='image-preview',
+          width='200',
+          alt='preview'
+        )
+        button.btn.btn-danger.btn-sm.remove-image(
+          type='button',
+          style='position: absolute; top: 0; right: 0;'
+        ) X
+    //- Hidden input để đánh dấu xóa ảnh - sẽ được thêm bằng JS khi cần
+    input.remove-image-flag(type="hidden" name="removeImage" value="false")

@@ -1,73 +1,265 @@
-/* --- Cài đặt chung --- */
 body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  background-color: #f4f4f4;
+ font-family: Arial, sans-serif;
+ margin: 0;
+ background-color: #f4f4f4;
 }
 
 a {
-  text-decoration: none;
-  color: inherit;
+ text-decoration: none;
+ color: inherit;
 }
 
 /* --- Header --- */
 .header {
-  background-color: #ffffff;
-  padding: 15px 0;
-  border-bottom: 1px solid #eeeeee;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+ background-color: #ffffff;
+ padding: 15px 0;
+ border-bottom: 1px solid #eeeeee;
+ box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+ position: relative;
+ z-index: 1000;
 }
 
 .container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 15px;
+ max-width: 1200px;
+ margin: 0 auto;
+ padding: 0 15px;
+ /* Loại bỏ overflow: visible !important; nếu nó gây ra vấn đề khác */
 }
 
 .row {
-  display: flex;
-  flex-wrap: wrap;
+ display: flex;
+ flex-wrap: wrap;
 }
 
 .align-items-center {
-  align-items: center;
+ align-items: center;
 }
 
 /* --- Logo --- */
-.inner-logo img {
-  max-height: 50px; /* Điều chỉnh chiều cao logo nếu cần */
-  display: block;
+.col-3 {
+ flex: 0 0 25%;
+ max-width: 25%;
 }
 
-/* --- Menu --- */
+.col-9 {
+ flex: 0 0 75%;
+ max-width: 75%;
+}
+
+.inner-logo img {
+ max-height: 50px;
+ display: block;
+}
+
+/* --- Menu Dropdown Đơn Giản --- */
+.inner-menu {
+ display: flex;
+ justify-content: flex-end;
+}
+
+/* Reset */
 .inner-menu ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  justify-content: flex-end; /* Đẩy menu sang phải */
-  gap: 25px; /* Khoảng cách giữa các mục menu */
+list-style: none;
+margin: 0;
+ padding: 0;
+}
+
+/* Menu chính */
+.inner-menu > ul {
+display: flex;
+}
+
+.inner-menu > ul > li {
+position: relative;
+margin: 0 12px;
 }
 
 .inner-menu a {
-  font-size: 16px;
-  font-weight: bold;
-  color: #333333;
-  padding: 10px 5px;
-  transition: color 0.3s ease;
+ display: block;
+ padding: 15px 10px;
+ color: #333;
+ font-size: 16px;
+ font-weight: bold;
+ text-decoration: none;
 }
 
 .inner-menu a:hover {
-  color: #007bff; /* Thay đổi màu khi di chuột qua */
+ color: #007bff;
+ background-color: rgba(0, 123, 255, 0.05);
+ border-radius: 4px;
+ transition: all 0.2s ease-in-out;
+}
+
+/* 🌟 Tìm kiếm gọn gàng */
+.search-form .input-group {
+ border-radius: 6px;
+ overflow: hidden;
+ box-shadow: 0 0 0 1px #ccc;
+}
+
+.search-form input {
+ border: none;
+ padding: 10px 15px;
+ outline: none;
+}
+
+.search-form button {
+ border: none;
+ padding: 10px 20px;
+ background-color: #007bff;
+ color: white;
+ transition: background 0.2s;
+}
+
+.search-form button:hover {
+ background-color: #0056b3;
+}
+
+/* 📱 Mobile menu + responsive layout */
+@media (max-width: 768px) {
+ .inner-menu ul {
+ flex-direction: column;
+ align-items: flex-start;
+ }
+
+ .inner-menu > ul > li {
+ margin: 8px 0;
+ }
+
+ .inner-menu {
+ justify-content: flex-start;
+ }
+
+ .inner-logo img {
+ max-height: 40px;
+ }
+
+ .search-form {
+ margin-top: 10px;
+ }
+}
+
+/* Ẩn tất cả dropdown */
+.inner-menu ul ul {
+ display: none;
+ position: absolute;
+ background: white;
+ border: 1px solid #ddd;
+ box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+ min-width: 180px;
+ z-index: 1000; /* Tăng z-index để nó luôn ở trên */
+}
+
+/* Dropdown cấp 1 */
+.inner-menu > ul > li > ul {
+ top: 100%;
+ left: 0;
+ margin-top: -1px;
+}
+
+/* Dropdown cấp 2, 3... */
+.inner-menu ul ul ul {
+  top: 0;
+  left: auto; /* Thay đổi từ 100% thành auto */
+  right: 100%; /* Thêm thuộc tính right để đẩy menu con sang trái */
+  margin-left: 0; /* Đảm bảo không có margin bên trái */
+  margin-right: -1px; /* Loại bỏ khoảng trống */
+}
+
+/* Tạo vùng hover lớn hơn cho menu chính */
+.inner-menu > ul > li {
+ position: relative;
+}
+
+/* Thêm z-index cho item menu chính khi hover */
+.inner-menu > ul > li:hover {
+ z-index: 1001; /* Đảm bảo menu chính luôn ở trên */
+}
+
+.inner-menu > ul > li::before {
+ content: '';
+ position: absolute;
+ top: 0;
+ left: -10px;
+ right: -10px;
+ bottom: -5px;
+ z-index: -1;
+}
+
+/* Hiện dropdown khi hover */
+.inner-menu li:hover > ul {
+ display: block;
+}
+
+/* Giữ dropdown hiển thị khi hover vào chính nó */
+.inner-menu ul ul:hover {
+ display: block;
+}
+
+/* Style cho item trong dropdown */
+.inner-menu ul ul a {
+ padding: 10px 15px;
+ font-weight: normal;
+ font-size: 14px;
+ color: #555;
+ border-bottom: 1px solid #f0f0f0;
+}
+
+.inner-menu ul ul a:hover {
+ background: #f8f9fa;
+ color: #007bff;
+}
+
+/* Mũi tên cho mục có submenu */
+.inner-menu li:has(ul) > a::after {
+ content: ' ▼';
+ font-size: 10px;
+}
+
+.inner-menu ul ul li:has(ul) > a::after {
+  content: ' ◀'; /* Đổi mũi tên cho phù hợp với hướng mở */
+  float: left;
+  margin-right: 5px; /* Điều chỉnh margin cho đẹp */
+}
+
+/* Hiện menu sang trái cho mục cuối */
+.inner-menu > ul > li:last-child ul ul {
+ left: auto;
+ right: 100%;
+ margin-left: 0;
+ margin-right: -1px;
+}
+
+.inner-menu > ul > li:last-child ul ul li:has(ul) > a::after {
+ content: ' ◀';
+ float: left;
+ margin-right: 5px;
+}
+
+/* Đảm bảo menu luôn có thể truy cập được */
+.inner-menu li {
+ position: relative;
+}
+
+/* Tạo vùng hover không nhìn thấy để dễ di chuột */
+.inner-menu > ul > li:hover::after {
+ content: '';
+ position: absolute;
+ top: 100%;
+ left: 0;
+ right: 0;
+ height: 2px;
+ background: transparent;
+ z-index: 998;
 }
 
 /* --- Footer --- */
 .footer {
-  background-color: #333333;
-  color: #ffffff;
-  text-align: center;
-  padding: 20px 0;
-  margin-top: 40px;
+ background-color: #333333;
+ color: #ffffff;
+ text-align: center;
+ padding: 20px 0;
+ margin-top: 40px;
 }
 
 /* --- Cài đặt chung & Layout --- */
@@ -80,7 +272,7 @@ a {
   margin-bottom: 1.5rem;
 }
 
-/* --- Tiêu đề chính của trang --- */
+/* --- Tiêu đề chính của trang ---
 .box-head {
   margin-bottom: 20px;
   padding-bottom: 10px;
@@ -89,9 +281,9 @@ a {
 
 .box-head .inner-title {
   font-size: 28px;
-  color: #222;
+  color: rgb(46, 187, 46);
   margin: 0;
-}
+} */
 
 /* --- Thẻ Sản Phẩm (Product Card) --- */
 .product-item {
@@ -100,7 +292,9 @@ a {
   border-radius: 8px;
   overflow: hidden; /* Quan trọng để bo góc hình ảnh */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
-  transition: box-shadow 0.3s ease, transform 0.3s ease;
+  transition:
+    box-shadow 0.3s ease,
+    transform 0.3s ease;
   position: relative; /* Dùng cho việc định vị tag giảm giá */
 }
 
@@ -113,6 +307,7 @@ a {
 .product-item .inner-image {
   width: 100%;
   aspect-ratio: 1 / 1; /* Giữ ảnh luôn vuông */
+  position: relative;
 }
 
 .product-item .inner-image img {
@@ -120,6 +315,18 @@ a {
   height: 100%;
   object-fit: cover; /* Đảm bảo ảnh vừa vặn mà không bị méo */
   display: block;
+}
+
+.product-item .inner-featured {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: green;
+  color: white;
+  padding: 3px 6px;
+  font-weight: 600;
+  font-size: 14px;
+  border-radius: 8px;
 }
 
 /* --- Nội dung sản phẩm --- */
@@ -168,4 +375,250 @@ a {
   border-radius: 4px;
   font-size: 13px;
   font-weight: bold;
+}
+
+/* Product Detail Page Styles */
+.product-detail {
+  background-color: #f8f9fa;
+  min-height: 100vh;
+  padding: 20px 0;
+}
+
+/* Product Image Section */
+.inner-thumb {
+  text-align: center;
+  padding: 20px;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.inner-thumb img {
+  max-width: 100%;
+  height: auto;
+  max-height: 400px;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+/* Product Info Section */
+.col-6:last-child {
+  padding-left: 30px;
+}
+
+.inner-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #2c3e50;
+  margin-bottom: 15px;
+  line-height: 1.3;
+}
+
+/* Category */
+.inner-category {
+  margin-bottom: 15px;
+  font-size: 0.95rem;
+}
+
+.inner-category span {
+  color: #6c757d;
+  font-weight: 500;
+}
+
+.inner-category a {
+  color: #007bff;
+  text-decoration: none;
+  font-weight: 600;
+  margin-left: 5px;
+}
+
+.inner-category a:hover {
+  text-decoration: underline;
+  color: #0056b3;
+}
+
+/* Pricing */
+.inner-price-new {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #28a745;
+  margin-bottom: 10px;
+}
+
+.inner-price.price-old {
+  font-size: 1.2rem;
+  color: #6c757d;
+  text-decoration: line-through;
+  margin-bottom: 10px;
+}
+
+.inner-percent {
+  background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+  color: white;
+  padding: 8px 15px;
+  border-radius: 20px;
+  font-weight: 600;
+  display: inline-block;
+  margin-bottom: 15px;
+  font-size: 0.9rem;
+}
+
+.inner-percent span {
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+/* Stock Info */
+.inner-stock {
+  background-color: #e3f2fd;
+  border-left: 4px solid #2196f3;
+  padding: 10px 15px;
+  margin-bottom: 20px;
+  border-radius: 4px;
+  font-weight: 500;
+  color: #1976d2;
+}
+
+.inner-stock span {
+  font-weight: 700;
+  color: #0d47a1;
+}
+
+/* Divider */
+hr {
+  border: none;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #dee2e6, transparent);
+  margin: 40px 0;
+}
+
+/* Description Section */
+.box-head {
+  color: #2c3e50;
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 3px solid #28a745;
+  display: inline-block;
+}
+
+.inner-desc {
+  background-color: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  line-height: 1.8;
+  font-size: 1rem;
+  color: #495057;
+}
+
+.inner-desc h3 {
+  color: #2c3e50;
+  margin-top: 25px;
+  margin-bottom: 15px;
+  font-weight: 600;
+}
+
+.inner-desc ul {
+  padding-left: 20px;
+}
+
+.inner-desc li {
+  margin-bottom: 8px;
+  color: #6c757d;
+}
+
+.inner-desc p {
+  margin-bottom: 15px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .col-6:last-child {
+    padding-left: 15px;
+    margin-top: 20px;
+  }
+
+  .inner-title {
+    font-size: 1.5rem;
+  }
+
+  .inner-price-new {
+    font-size: 1.5rem;
+  }
+
+  form {
+    padding: 20px;
+  }
+
+  .inner-desc {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 576px) {
+  .inner-title {
+    font-size: 1.3rem;
+  }
+
+  .inner-price-new {
+    font-size: 1.3rem;
+  }
+
+  .box-head {
+    font-size: 1.5rem;
+  }
+}
+/* 🌟 Vùng thông báo hiển thị (mặc định là hiện) */
+[show-alert] {
+  position: fixed;
+  top: 70px;
+  right: 15px;
+  z-index: 9999;
+  transition: all 0.3s ease;
+}
+
+/* ❌ Khi muốn ẩn thông báo: thêm class .alert-hidden */
+[show-alert].alert-hidden {
+  animation-name: alert-hidden;
+  animation-duration: 0.5s;
+  animation-fill-mode: both;
+}
+
+/* 🎬 Keyframe ẩn thông báo (slide ra ngoài và biến mất) */
+@keyframes alert-hidden {
+  from {
+    right: 15px;
+    opacity: 1;
+  }
+  to {
+    right: -100%;
+    opacity: 0;
+    display: none;
+  }
+}
+
+/* 📦 Nút đóng nằm trong alert */
+[show-alert] [close-alert] {
+  background: #ffffffc4; /* 💡 nền trắng trong suốt một chút */
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  line-height: 24px; /* 📐 canh chữ theo chiều cao */
+  text-align: center;
+  font-weight: 600;
+  border-radius: 50%; /* 🎯 tạo hình tròn */
+  cursor: pointer; /* 🖱️ hiện hình tay khi hover */
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  font-size: 14px;
+  transition: background 0.3s;
+}
+
+/*  Hover có hiệu ứng mượt hơn */
+.show-alert [close-alert]:hover {
+  background: #ffcccc;
 }

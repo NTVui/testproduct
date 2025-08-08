@@ -1,0 +1,93 @@
+extends ../../layouts/default.pug
+include ../../mixins/box-head.pug
+
+block main
+    .container.my-5
+        .row.justify-content-center
+            .col-md-8
+                .card
+                    .card-header.bg-success.text-white.text-center
+                        h2 Đặt hàng thành công!
+                        div(class="alert alert-success") Đơn hàng sẽ sớm được giao cho bạn. Hãy kiên nhẫn chờ nha!
+
+                    
+                    .card-body
+                        //- DEBUG: Hiển thị toàn bộ order object
+                        //- .alert.alert-info
+                        //-     h5 DEBUG INFO:
+                        //-     pre= JSON.stringify(order, null, 2)
+                        
+                        //- Thông tin khách hàng  
+                        .mb-4
+                            h4 😎 Thông tin khách hàng
+                            .card.bg-light
+                                .card-body
+                                    if order && order.userInfo
+                                        p <strong>Họ tên:</strong> #{order.userInfo.fullname || 'Không có'}
+                                        p <strong>Số điện thoại:</strong> #{order.userInfo.phone || 'Không có'}
+                                        p <strong>Địa chỉ:</strong> #{order.userInfo.address || 'Không có'}
+                                    else
+                                        p.text-danger Không có thông tin khách hàng
+                        
+                        //- Thông tin đơn hàng
+                        .mb-4
+                            h4 🛍️ Thông tin đơn hàng
+                            p <strong>Mã đơn hàng:</strong> #{order.cart_id}
+                            p <strong>Ngày đặt:</strong> #{order.createdAt}
+                        
+                        //- Danh sách sản phẩm
+                        .mb-4
+                            h4 📦 Sản phẩm đã đặt
+                            if order.products && order.products.length > 0
+                                .table-responsive
+                                    table.table.table-striped
+                                        thead.table-dark
+                                            tr
+                                                th STT
+                                                th Hình ảnh
+                                                th Tên sản phẩm
+                                                th Giá
+                                                th Số lượng
+                                                th Thành tiền
+                                        tbody
+                                            each product, index in order.products
+                                                tr
+                                                    td #{index + 1}
+                                                    td
+                                                        if product.productInfo && product.productInfo.thumbnail
+                                                            img(src=product.productInfo.thumbnail, alt=product.productInfo.title, width="50")
+                                                        else
+                                                            span Không có ảnh
+                                                    td
+                                                        if product.productInfo
+                                                            = product.productInfo.title
+                                                        else
+                                                            | Không có tên
+                                                    td
+                                                        if product.priceNew
+                                                            = product.priceNew.toLocaleString('vi-VN')
+                                                        else
+                                                            = product.price.toLocaleString('vi-VN')
+                                                        |  VNĐ
+                                                    td= product.quantity
+                                                    td
+                                                        if product.totalPrice
+                                                            strong= product.totalPrice.toLocaleString('vi-VN')
+                                                        else
+                                                            strong 0
+                                                        |  VNĐ
+                                        tfoot
+                                            tr.table-success
+                                                td(colspan="4") <strong>Tổng cộng:</strong>
+                                                td
+                                                    strong.text-success= order.totalPrice ? order.totalPrice.toLocaleString('vi-VN') : '0'
+                                                    |  VNĐ
+                            else
+                                .alert.alert-warning Không có sản phẩm nào
+                        
+                        //- Buttons
+                        .text-center
+                            a.btn.btn-primary.me-2(href="/") Trở lại
+                            
+                            //- a.btn.btn-outline-secondary(href="/user/orders") Xem đơn hàng của tôi
+        

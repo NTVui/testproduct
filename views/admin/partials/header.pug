@@ -1,8 +1,15 @@
 header.header 
     .container-fluid 
-        .row.align-items-center 
-            .col-3 
-                .inner-logo 
-                    a(href="/admin/dashboard") Admin 
-
-            .col-9  
+        .d-flex.align-items-center.justify-content-between
+            
+            .inner-logo 
+                a(href="/admin/dashboard", class="text-decoration-none fw-bold text-dark fs-4") Admin
+            .d-flex.align-items-center.gap-3
+                a.btn.btn-outline-primary(href=`${prefixAdmin}/my-account`)
+                    i.fas.fa-user-circle.me-2
+                    | #{user.fullname}
+            
+                form(action=`${prefixAdmin}/auth/logout`, method="POST")
+                    button.btn.btn-outline-danger(type="submit")
+                        i.fas.fa-sign-out-alt.me-2
+                        | Đăng xuất

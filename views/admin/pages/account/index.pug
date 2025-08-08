@@ -1,0 +1,61 @@
+extends ../../layouts/default.pug
+
+
+block main
+  
+  h1 Danh sách tài khoản
+  
+  .card.mb-3p
+        .card-header Danh sách
+            .card-body
+                .row  
+                .col-8 
+                    
+                .col-4
+                    a(
+                    href=`${prefixAdmin}/accounts/create`
+                    class="btn btn-outline-success"
+                    ) + Thêm mới
+            .card-body 
+                table.table.table-hover.table-sm
+                    thead
+                        tr
+                            th STT
+                            th Avatar
+                            th Họ tên
+                            th Phân quyền
+                            th Email 
+                            th Trạng thái
+                            th Hành động
+                    tbody
+                        if records.length > 0
+                            each item, index in records
+                                tr
+                                    td #{index + 1}
+                                    td
+                                        img(src=item.avatar, alt=item.fullname, width='100px')
+                                    td #{item.fullname}
+                                    td #{item.role.title}
+                                    td #{item.email}
+                                    td
+                                        if item.status == 'active'
+                                            a(
+                                                href='javascript:;',
+                                                data-status=item.status,
+                                                
+                                                class='badge.badge-success'
+                                            ) Hoạt động
+                                        else
+                                            a(
+                                                href='javascript:;',
+                                                data-status=item.status,
+                                                
+                                                class='badge.badge-danger'
+                                            ) Dừng Hoạt động
+                                    td
+                                        a.btn.btn-sm.btn-info.text-white(href=`${prefixAdmin}/accounts/detail/${item._id}`) Chi tiết
+                                        a.btn.btn-sm.btn-warning.text-white.ms-1(href=`${prefixAdmin}/accounts/edit/${item._id}`) Sửa
+                                        a.btn.btn-sm.btn-danger.text-white.ms-1(href=`${prefixAdmin}/accounts/delete/${item._id}`) Xóa
+                        else
+                            tr
+                            td.text-center(colspan='4') Không có dữ liệu

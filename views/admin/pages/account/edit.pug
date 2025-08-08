@@ -1,0 +1,67 @@
+extends ../../layouts/default.pug
+include ../../mixins/alert.pug
+
+block main
+  h1.mb-4 Chỉnh sửa thông tin tài khoản
+  +alertError(5000)
+  +alertSuccess(5000)
+  form(
+    action=`${prefixAdmin}/accounts/edit/${account._id}?_method=PATCH`,
+    method='POST',
+    enctype="multipart/form-data"
+    )
+
+    .form-group
+      label(for='fullname') Họ tên
+      input#fullname.form-control(type='text', name='fullname',value=account.fullname)
+
+    .form-group
+      label(for='email') Email
+      input#email.form-control(type='email', name='email',value=account.email )
+
+    .form-group
+      label(for='password') Mật khẩu
+      input#password.form-control(type='password', name='password',placeholder='Đổi mật khẩu (nếu muốn)')
+
+    .form-group
+      label(for='phone') Số điện thoại
+      input#phone.form-control(type='tel', name='phone', value=account.phone)
+
+    div(
+      class="form-group"
+      upload-image
+      )
+      label(for='avatar') Ảnh
+      input#avatar.form-control-file(type='file', name='avatar', accept="image/*", upload-image-input)
+      img(src=account.avatar, upload-image-preview, class="image-preview")
+    
+    .form-group
+      label(for='role_id') Phân quyền
+       
+      select#role_id.form-control(name="role_id")
+        option(value="") -- Chọn --
+        each item in roles  
+            option(value=item.id) #{item.title}
+        
+
+    .form-group.form-check.form-check-inline
+      input#status-active.form-check-input(
+        type='radio',
+        name='status',
+        value='active',
+        checked
+      )
+      label.form-check-label(for='status-active') Hoạt động
+
+    .form-group.form-check.form-check-inline
+      input#status-inactive.form-check-input(
+        type='radio',
+        name='status',
+        value='inactive',
+        
+      )
+      label.form-check-label(for='status-inactive') Dừng Hoạt động
+
+    
+    div(class="form-group")
+      button.btn.btn-primary(type='submit') Cập nhật

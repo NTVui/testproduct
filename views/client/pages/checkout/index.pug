@@ -1,0 +1,106 @@
+extends ../../layouts/default.pug
+include ../../mixins/box-head.pug
+include ../../mixins/alert.pug
+
+block main
+  +alertSuccess(5000)
+  +alertError(5000)
+  
+  .container.my-3
+    .row
+      .col-12
+        +box-head("Đặt hàng")
+    
+    .row
+      .col-12
+        if(cartDetail.products && cartDetail.products.length > 0)
+          // Hiển thị sản phẩm trong đơn hàng
+          table(class="table table-bordered")
+            thead
+              tr
+                th STT
+                th Ảnh
+                th Tên
+                th Giá
+                th Số lượng
+                th Tổng tiền
+            tbody
+              each item, index in cartDetail.products
+                tr
+                  td #{index+1}
+                  td
+                    img(src=item.productInfo.thumbnail, alt=item.productInfo.title, width="60px")
+                  td #{item.productInfo.title}
+                  td #{item.productInfo.priceNew}$
+                  td #{item.quantity}
+                  td #{item.totalPrice}$
+          
+          // Hiển thị tổng đơn hàng
+          .row
+            .col-12
+              div(class="text-right mb-4") 
+                strong Tổng đơn hàng: #{cartDetail.totalPrice}$
+          
+          // Form thông tin khách hàng
+          .row
+            .col-12
+              .card
+                .card-body
+                  form(
+                    action="/checkout/order"
+                    method="POST"
+                  )
+                    .row
+                      .col-12
+                        h5.mb-3 Thông tin khách hàng
+                    
+                    .row
+                      .col-12
+                        .form-group
+                          label(for="fullname") Họ tên
+                          input(
+                            type="text"
+                            class="form-control"
+                            id="fullname"
+                            name="fullname"
+                            required
+                            placeholder="Nhập họ và tên"
+                          )
+                    
+                    .row
+                      .col-12
+                        .form-group
+                          label(for="phone") Số điện thoại
+                          input(
+                            type="tel"
+                            class="form-control"
+                            id="phone"
+                            name="phone"
+                            required
+                            placeholder="Nhập số điện thoại"
+                          )
+                    
+                    .row
+                      .col-12
+                        .form-group
+                          label(for="address") Địa chỉ
+                          textarea(
+                            class="form-control"
+                            id="address"
+                            name="address"
+                            rows="3"
+                            required
+                            placeholder="Nhập địa chỉ nhận hàng"
+                          )
+                    
+                    .row
+                      .col-12.text-center
+                        button(
+                          type="submit"
+                          class="btn btn-success btn-lg px-5"
+                          style="background-color: #28a745; border: none; font-weight: bold;"
+                        ) ĐẶT HÀNG
+        else 
+          .text-center
+            p Giỏ hàng của bạn đang trống
+            a(href="/products", class="btn btn-primary") Tiếp tục mua sắm

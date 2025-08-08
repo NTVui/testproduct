@@ -1,5 +1,6 @@
 extends ../../layouts/default.pug
 include ../../mixins/alert.pug
+include ../../mixins/select-tree.pug
 
 block main
   h1.mb-4 Chỉnh sửa sản phẩm
@@ -18,8 +19,31 @@ block main
       input#title.form-control(type='text', name='title',value=product.title, required)
 
     .form-group
+      label(for='product_category_id') Danh mục
+      select#product_category_id.form-control(name="product_category_id")
+        option(value="") -- Chọn danh mục --
+        if(category)
+          +selectTree(category, 1, product.product_category_id)
+    .form-group.form-check.form-check-inline
+      input#featured1.form-check-input(
+        type='radio',
+        name='featured',
+        value='1',
+        checked=(product.featured=="1"?true:false)
+      )
+      label.form-check-label(for='featured1') Nổi bật
+
+    .form-group.form-check.form-check-inline
+      input#featured2.form-check-input(
+        type='radio',
+        name='featured',
+        value='0',
+        checked=(product.featured=="0"?true:false)
+      )
+      label.form-check-label(for='featured2') Không
+    .form-group
       label(for='desc') Mô tả
-      textarea#desc.form-control(rows='5', name='description', value=product.description) #{product.description}
+      textarea#desc.form-control.textarea-tinymce(rows='5', name='description', value=product.description) #{product.description}
 
     .form-group
       label(for='price') Giá
@@ -95,4 +119,4 @@ block main
   
   script(src='/admin/js/product.js')
 
-//- input# lần lượt là id và class
+//- #là id, . là class

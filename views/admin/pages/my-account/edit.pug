@@ -1,0 +1,45 @@
+extends ../../layouts/default.pug
+include ../../mixins/alert.pug
+
+block main
+  h1.mb-4 Cập nhật thông tin cá nhân
+  +alertError(5000)
+  +alertSuccess(5000)
+  form(
+    action=`${prefixAdmin}/my-account/edit/?_method=PATCH`,
+    method='POST',
+    enctype="multipart/form-data"
+    )
+
+    .form-group
+      label(for='fullname') Họ tên *
+      input#fullname.form-control(type='text', name='fullname',value=user.fullname )
+
+    .form-group
+      label(for='email') Email *
+      input#email.form-control(type='email', name='email',value=user.email )
+
+    .form-group
+      label(for='password') Mật khẩu *
+      input#password.form-control(type='password', name='password',placeholder='Đổi mật khẩu (nếu muốn)')
+
+    .form-group
+      label(for='phone') Số điện thoại
+      input#phone.form-control(type='phone', name='phone',value=user.phone)
+
+    div(
+      class="form-group"
+      upload-image
+      )
+      label(for='avatar') Ảnh
+      input#avatar.form-control-file(type='file', name='avatar', accept="image/*", upload-image-input)
+      img(src=user.avatar, upload-image-preview, class="image-preview")
+
+    
+    div(class="form-group")
+      button.btn.btn-primary(type='submit') Cập nhật
+
+  
+  
+
+

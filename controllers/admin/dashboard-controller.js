@@ -5,4 +5,4 @@ module.exports.dashboard = (req, res) => {
         pageTitle: "Trang tổng quan"
 
     });
-    }
+}
