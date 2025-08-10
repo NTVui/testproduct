@@ -1,8 +1,5 @@
 const express = require('express')
-const multer = require('multer')
 
-//const storageMulter= require("../../helpers/storageMulter")
-const upload = multer() //({storage: storageMulter})
 const router = express.Router()
 const controller = require('../../controllers/admin/role-controller')
 

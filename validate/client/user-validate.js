@@ -53,3 +53,26 @@ module.exports.validateForgotPassWord = (req,res, next)=>{
   }
   next()
 }
+
+module.exports.validateResetPassword = (req,res, next)=>{
+
+  if(!req.body.password){
+    req.flash("error", "Mật khẩu không được để trống!")
+    const redirectUrl = req.get('Referer')
+    res.redirect(redirectUrl)
+    return
+  }
+  if(!req.body.confirmPassword){
+    req.flash("error", "Vui lòng xác nhận lại mật khẩu!")
+    const redirectUrl = req.get('Referer')
+    res.redirect(redirectUrl)
+    return
+  }
+  if(req.body.password != req.body.confirmPassword){
+    req.flash("error", "Mật khẩu không trùng khớp!")
+    const redirectUrl = req.get('Referer')
+    res.redirect(redirectUrl)
+    return
+  }
+  next()
+}

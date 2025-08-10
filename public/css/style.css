@@ -1,160 +1,160 @@
 body {
- font-family: Arial, sans-serif;
- margin: 0;
- background-color: #f4f4f4;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background-color: #f4f4f4;
 }
 
 a {
- text-decoration: none;
- color: inherit;
+  text-decoration: none;
+  color: inherit;
 }
 
 /* --- Header --- */
 .header {
- background-color: #ffffff;
- padding: 15px 0;
- border-bottom: 1px solid #eeeeee;
- box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
- position: relative;
- z-index: 1000;
+  background-color: #ffffff;
+  padding: 15px 0;
+  border-bottom: 1px solid #eeeeee;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  position: relative;
+  z-index: 1000;
 }
 
 .container {
- max-width: 1200px;
- margin: 0 auto;
- padding: 0 15px;
- /* Loại bỏ overflow: visible !important; nếu nó gây ra vấn đề khác */
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+  /* Loại bỏ overflow: visible !important; nếu nó gây ra vấn đề khác */
 }
 
 .row {
- display: flex;
- flex-wrap: wrap;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .align-items-center {
- align-items: center;
+  align-items: center;
 }
 
 /* --- Logo --- */
 .col-3 {
- flex: 0 0 25%;
- max-width: 25%;
+  flex: 0 0 25%;
+  max-width: 25%;
 }
 
 .col-9 {
- flex: 0 0 75%;
- max-width: 75%;
+  flex: 0 0 75%;
+  max-width: 75%;
 }
 
 .inner-logo img {
- max-height: 50px;
- display: block;
+  max-height: 50px;
+  display: block;
 }
 
 /* --- Menu Dropdown Đơn Giản --- */
 .inner-menu {
- display: flex;
- justify-content: flex-end;
+  display: flex;
+  justify-content: flex-end;
 }
 
 /* Reset */
 .inner-menu ul {
-list-style: none;
-margin: 0;
- padding: 0;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 /* Menu chính */
 .inner-menu > ul {
-display: flex;
+  display: flex;
 }
 
 .inner-menu > ul > li {
-position: relative;
-margin: 0 12px;
+  position: relative;
+  margin: 0 12px;
 }
 
 .inner-menu a {
- display: block;
- padding: 15px 10px;
- color: #333;
- font-size: 16px;
- font-weight: bold;
- text-decoration: none;
+  display: block;
+  padding: 15px 10px;
+  color: #333;
+  font-size: 16px;
+  font-weight: bold;
+  text-decoration: none;
 }
 
 .inner-menu a:hover {
- color: #007bff;
- background-color: rgba(0, 123, 255, 0.05);
- border-radius: 4px;
- transition: all 0.2s ease-in-out;
+  color: #007bff;
+  background-color: rgba(0, 123, 255, 0.05);
+  border-radius: 4px;
+  transition: all 0.2s ease-in-out;
 }
 
 /* 🌟 Tìm kiếm gọn gàng */
 .search-form .input-group {
- border-radius: 6px;
- overflow: hidden;
- box-shadow: 0 0 0 1px #ccc;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 0 0 1px #ccc;
 }
 
 .search-form input {
- border: none;
- padding: 10px 15px;
- outline: none;
+  border: none;
+  padding: 10px 15px;
+  outline: none;
 }
 
 .search-form button {
- border: none;
- padding: 10px 20px;
- background-color: #007bff;
- color: white;
- transition: background 0.2s;
+  border: none;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  transition: background 0.2s;
 }
 
 .search-form button:hover {
- background-color: #0056b3;
+  background-color: #0056b3;
 }
 
 /* 📱 Mobile menu + responsive layout */
 @media (max-width: 768px) {
- .inner-menu ul {
- flex-direction: column;
- align-items: flex-start;
- }
+  .inner-menu ul {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 
- .inner-menu > ul > li {
- margin: 8px 0;
- }
+  .inner-menu > ul > li {
+    margin: 8px 0;
+  }
 
- .inner-menu {
- justify-content: flex-start;
- }
+  .inner-menu {
+    justify-content: flex-start;
+  }
 
- .inner-logo img {
- max-height: 40px;
- }
+  .inner-logo img {
+    max-height: 40px;
+  }
 
- .search-form {
- margin-top: 10px;
- }
+  .search-form {
+    margin-top: 10px;
+  }
 }
 
 /* Ẩn tất cả dropdown */
 .inner-menu ul ul {
- display: none;
- position: absolute;
- background: white;
- border: 1px solid #ddd;
- box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
- min-width: 180px;
- z-index: 1000; /* Tăng z-index để nó luôn ở trên */
+  display: none;
+  position: absolute;
+  background: white;
+  border: 1px solid #ddd;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  min-width: 180px;
+  z-index: 1000; /* Tăng z-index để nó luôn ở trên */
 }
 
 /* Dropdown cấp 1 */
 .inner-menu > ul > li > ul {
- top: 100%;
- left: 0;
- margin-top: -1px;
+  top: 100%;
+  left: 0;
+  margin-top: -1px;
 }
 
 /* Dropdown cấp 2, 3... */
@@ -168,52 +168,52 @@ margin: 0 12px;
 
 /* Tạo vùng hover lớn hơn cho menu chính */
 .inner-menu > ul > li {
- position: relative;
+  position: relative;
 }
 
 /* Thêm z-index cho item menu chính khi hover */
 .inner-menu > ul > li:hover {
- z-index: 1001; /* Đảm bảo menu chính luôn ở trên */
+  z-index: 1001; /* Đảm bảo menu chính luôn ở trên */
 }
 
 .inner-menu > ul > li::before {
- content: '';
- position: absolute;
- top: 0;
- left: -10px;
- right: -10px;
- bottom: -5px;
- z-index: -1;
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -10px;
+  right: -10px;
+  bottom: -5px;
+  z-index: -1;
 }
 
 /* Hiện dropdown khi hover */
 .inner-menu li:hover > ul {
- display: block;
+  display: block;
 }
 
 /* Giữ dropdown hiển thị khi hover vào chính nó */
 .inner-menu ul ul:hover {
- display: block;
+  display: block;
 }
 
 /* Style cho item trong dropdown */
 .inner-menu ul ul a {
- padding: 10px 15px;
- font-weight: normal;
- font-size: 14px;
- color: #555;
- border-bottom: 1px solid #f0f0f0;
+  padding: 10px 15px;
+  font-weight: normal;
+  font-size: 14px;
+  color: #555;
+  border-bottom: 1px solid #f0f0f0;
 }
 
 .inner-menu ul ul a:hover {
- background: #f8f9fa;
- color: #007bff;
+  background: #f8f9fa;
+  color: #007bff;
 }
 
 /* Mũi tên cho mục có submenu */
 .inner-menu li:has(ul) > a::after {
- content: ' ▼';
- font-size: 10px;
+  content: ' ▼';
+  font-size: 10px;
 }
 
 .inner-menu ul ul li:has(ul) > a::after {
@@ -224,42 +224,42 @@ margin: 0 12px;
 
 /* Hiện menu sang trái cho mục cuối */
 .inner-menu > ul > li:last-child ul ul {
- left: auto;
- right: 100%;
- margin-left: 0;
- margin-right: -1px;
+  left: auto;
+  right: 100%;
+  margin-left: 0;
+  margin-right: -1px;
 }
 
 .inner-menu > ul > li:last-child ul ul li:has(ul) > a::after {
- content: ' ◀';
- float: left;
- margin-right: 5px;
+  content: ' ◀';
+  float: left;
+  margin-right: 5px;
 }
 
 /* Đảm bảo menu luôn có thể truy cập được */
 .inner-menu li {
- position: relative;
+  position: relative;
 }
 
 /* Tạo vùng hover không nhìn thấy để dễ di chuột */
 .inner-menu > ul > li:hover::after {
- content: '';
- position: absolute;
- top: 100%;
- left: 0;
- right: 0;
- height: 2px;
- background: transparent;
- z-index: 998;
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: transparent;
+  z-index: 998;
 }
 
 /* --- Footer --- */
 .footer {
- background-color: #333333;
- color: #ffffff;
- text-align: center;
- padding: 20px 0;
- margin-top: 40px;
+  background-color: #333333;
+  color: #ffffff;
+  text-align: center;
+  padding: 20px 0;
+  margin-top: 40px;
 }
 
 /* --- Cài đặt chung & Layout --- */
@@ -621,4 +621,195 @@ hr {
 /*  Hover có hiệu ứng mượt hơn */
 .show-alert [close-alert]:hover {
   background: #ffcccc;
+}
+
+.col-12 {
+  width: 100%;
+  max-width: 600px; /* Giới hạn chiều rộng chat */
+  padding: 10px;
+}
+
+/* 💬 Bong bóng chung */
+.inner-body {
+  height: calc(100vh - 120px);
+  flex: 1;
+  padding: 15px;
+  overflow-y: auto;
+  background: #f7f7f7;
+}
+
+.inner-incoming,
+.inner-outgoing {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 12px;
+  max-width: 70%;
+  animation: fadeInUp 0.3s ease;
+}
+
+.inner-incoming {
+  align-items: flex-start;
+}
+
+.inner-outgoing {
+  align-items: flex-end;
+  margin-left: auto;
+}
+
+/* 👤 Tên người gửi */
+.inner-name {
+  font-size: 12px;
+  color: #777;
+  margin-bottom: 4px;
+}
+
+/* 📦 Nội dung tin nhắn */
+.inner-content {
+  padding: 10px 14px;
+  border-radius: 16px;
+  word-wrap: break-word;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.inner-incoming .inner-content {
+  background: #ffffff;
+  color: #333;
+  border-top-left-radius: 4px;
+}
+
+.inner-outgoing .inner-content {
+  background: #4e8cff;
+  color: white;
+  border-top-right-radius: 4px;
+}
+
+/* ✨ Hiệu ứng tin nhắn mới */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 📝 Form nhập tin nhắn */
+.inner-foot {
+  padding: 10px;
+  background: #fff;
+  border-top: 1px solid #ddd;
+}
+
+.inner-form {
+  display: flex;
+}
+
+.inner-form input[type='text'] {
+  flex: 1;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  margin-right: 8px;
+}
+
+.inner-form button {
+  background: #4e8cff;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    background 0.3s,
+    transform 0.1s;
+}
+
+.inner-form button:hover {
+  background: #3a6fd6;
+}
+
+.inner-form button:active {
+  transform: scale(0.9);
+}
+
+/*emoji-picker*/
+.tooltip {
+  visibility: hidden;
+}
+
+.tooltip.shown {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* 🗂 Vùng chứa toàn bộ danh sách typing */
+.inner-list-typing {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Khoảng cách giữa các box-typing */
+  padding: 10px;
+  background: #f9f9f9;
+  border-radius: 10px;
+  max-width: 300px;
+}
+
+/* 📦 Khung từng người */
+.box-typing {
+  display: flex;
+  align-items: center;
+  background: white;
+  border-radius: 8px;
+  padding: 8px 12px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+  transition: transform 0.2s ease;
+}
+
+.box-typing:hover {
+  transform: translateY(-2px);
+}
+
+/* 👤 Tên người */
+.inner-name {
+  font-weight: 500;
+  color: #333;
+  margin-right: 10px;
+  white-space: nowrap;
+}
+
+/* 💬 Chấm đang gõ */
+.inner-dots {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.inner-dots span {
+  width: 6px;
+  height: 6px;
+  background-color: #888;
+  border-radius: 50%;
+  display: inline-block;
+  animation: blink 1.4s infinite ease-in-out;
+}
+
+/* ⏳ Tạo hiệu ứng 3 chấm nhấp nháy */
+.inner-dots span:nth-child(1) {
+  animation-delay: 0s;
+}
+.inner-dots span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.inner-dots span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes blink {
+  0%, 80%, 100% { transform: scale(0.6); opacity: 0.4; }
+  40% { transform: scale(1); opacity: 1; }
 }

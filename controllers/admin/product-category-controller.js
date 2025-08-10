@@ -107,40 +107,50 @@ module.exports.edit = async (req, res) => {
 //     res.redirect(`${systemConfig.prefixAdmin}/products-category/edit/${id}`);
 //   }
 // [PATCH] /admin/products-category/edit/:id
+// [PATCH] /admin/products-category/edit/:id
 module.exports.editPatch = async (req, res) => {
-  const id = req.params.id
-  req.body.position = parseInt(req.body.position)
+  const id = req.params.id;
+  req.body.position = parseInt(req.body.position);
 
   try {
-    const record = await ProductCategory.findOne({_id: id, deleted: false})
-
+    const record = await ProductCategory.findOne({ _id: id, deleted: false });
     if (!record) {
-      req.flash('error', 'Không tìm thấy bản ghi!')
-      return res.redirect(`${systemConfig.prefixAdmin}/products-category`)
+      req.flash('error', 'Không tìm thấy bản ghi!');
+      return res.redirect(`${systemConfig.prefixAdmin}/products-category`);
     }
 
-    // Cập nhật các field
-    record.title = req.body.title
-    record.parent_id = req.body.parent_id || null
-    record.description = req.body.description
-    record.position = req.body.position
-    record.status = req.body.status
-
-    // Xử lý ảnh
-    if (req.file && req.body.thumbnail) {
-      record.thumbnail = req.body.thumbnail
-    } else if (req.body.removeImage === 'true') {
-      record.thumbnail = null
+    // Không cho chọn chính nó làm cha
+    if (req.body.parent_id === id) {
+      req.body.parent_id = null;
     }
 
-    await record.save()
+    record.title = req.body.title;
+    record.parent_id = req.body.parent_id || null;
+    record.description = req.body.description;
+    record.position = req.body.position;
+    record.status = req.body.status;
 
-    req.flash('success', 'Chỉnh sửa thành công!')
+    if (req.file) {
+      // Nếu upload qua Cloudinary
+      if (req.body.thumbnail) {
+        record.thumbnail = req.body.thumbnail; //  Lấy URL ảnh từ uploadCloud
+      } else {
+        record.thumbnail = req.file.filename; // Trường hợp upload local
+      }
+      } else if (req.body.removeImage === "true") {
+        record.thumbnail = null;
+      }
+
+
+    await record.save();
+    req.flash('success', 'Chỉnh sửa thành công!');
   } catch (error) {
-    console.error('Error updating:', error)
-    req.flash('error', 'Cập nhật thất bại!')
+    console.error('Error updating:', error);
+    req.flash('error', 'Cập nhật thất bại!');
   }
 
-  res.redirect(`${systemConfig.prefixAdmin}/products-category/edit/${id}`)
-}
+  res.redirect(`${systemConfig.prefixAdmin}/products-category/edit/${id}`);
+};
+
+
 

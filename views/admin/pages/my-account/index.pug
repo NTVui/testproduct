@@ -48,6 +48,7 @@ block main
                 b.text-warning= role.title
 
             // ✏️ Nút chỉnh sửa
+            
             a#edit-profile(href=`${prefixAdmin}/my-account/edit` class="btn btn-primary d-block mx-auto w-25")
-              i.fas.fa-edit.me-2
+              i(class="fa-solid fa-user-pen")
               | Chỉnh sửa thông tin

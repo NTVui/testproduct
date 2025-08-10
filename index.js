@@ -7,6 +7,22 @@ const cookieParser = require('cookie-parser')
 const session = require('express-session')
 const database = require('./config/database')
 const moment = require("moment-timezone");
+const http = require('http');
+const { Server } = require("socket.io");
+
+
+//khi a gửi data lên server, server chỉ trả về cho A
+//VD: Khi A gửi tin nhắn nhưng bị lỗi, thì server chỉ trả về thông báo
+//lỗi cho A thôi
+//socket.emit("SERVER_RETURN_MESSAGE": data)
+
+//Khi A gửi data lên server, server trả về cho cả A, B, C,...
+//VD: Tin nhắn chat
+//io.mot("SERVER_RETURN_MESSAGE", data)
+
+//Khi A gửi data lên server, server trả về cho B, C,... (không trả về cho A)
+//VD: Typing...
+//socket.broadcast.emit("SERVER_RETURN_MESSAGE", data)
 
 require('dotenv').config()
 
@@ -36,6 +52,12 @@ app.set('views', `${__dirname}/views`)
 app.set('view engine', 'pug')
 app.use(express.static(`${__dirname}/public`))
 
+//SocketIo
+const server = http.createServer(app);
+const io = new Server(server);
+global._io = io
+
+
 //Express-flash
 app.use(cookieParser('keytutao'))
 app.use(session({ cookie: { maxAge: 60000 } }))
@@ -47,6 +69,13 @@ app.locals.moment = moment
 route(app)
 routeAdmin(app)
 
-app.listen(port, () => {
+app.use((req, res) => {
+  res.status(404).render("client/pages/errors/404", {
+    pageTitle: "404 not found"
+  });
+});
+
+server.listen(port, () => {
   console.log(`App listening on port ${port}`)
 })
+

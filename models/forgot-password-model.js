@@ -1,17 +1,22 @@
-const mongoose = require("mongoose");
-const generate = require("../helpers/generate")
-const forgotPasswordSchema = new mongoose.Schema({
-    
+const mongoose = require('mongoose')
+const forgotPasswordSchema = new mongoose.Schema(
+  {
     email: String,
     otp: String,
-    expireAt:{
-        type: Date,
-        expires: 120
-    }
-    
-}, {
-    timestamps: true
-});
-const ForgotPassword = mongoose.model("ForgotPassword",forgotPasswordSchema, "forgot-password");
+    expireAt: {
+      type: Date,
+      default: Date.now,
+      expires: 300,
+    },
+  },
+  {
+    timestamps: true,
+  },
+)
+const ForgotPassword = mongoose.model(
+  'ForgotPassword',
+  forgotPasswordSchema,
+  'forgot-password',
+)
 
-module.exports = ForgotPassword;
+module.exports = ForgotPassword

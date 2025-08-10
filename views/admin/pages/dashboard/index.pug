@@ -1,7 +1,69 @@
 extends ../../layouts/default.pug
-block main 
-    h1 Trang tổng quan
-    div #{user}
-    div #{role}
 
-    
+block main
+  h1 Trang tổng quan
+
+  .row.mt-4
+    .col-12
+      .card.mb-4
+        .card-header.bg-primary.text-white
+          h5.mb-0 Thông tin tài khoản
+
+        .card-body
+          if (user.avatar)
+            img(src=user.avatar, alt="Ảnh đại diện", style="height: 100px; margin-bottom: 15px;", class="rounded-circle d-block mx-auto")
+
+          if (user.fullName)
+            p.mb-2
+              i.fas.fa-user.text-muted.me-2
+              | Họ tên: 
+              b= user.fullName
+
+          if (user.email)
+            p.mb-2
+              i.fas.fa-envelope.text-muted.me-2
+              | Email: 
+              b= user.email
+
+          if (user.phone)
+            p.mb-2
+              i.fas.fa-phone.text-muted.me-2
+              | Số điện thoại: 
+              b= user.phone
+
+          if (role && role.title)
+            p.mb-2
+              i.fas.fa-shield-alt.text-muted.me-2
+              | Phân quyền: 
+              b= role.title
+
+          
+          
+    .col-6 
+        .card.mb-4 
+            .card-header Danh mục sản phẩm 
+            .card-body 
+                p Số lượng: <b>#{static.categoryProduct.total}</b>
+                p Hoạt động <b>#{static.categoryProduct.active}</b>
+                p Dừng hoạt động <b>#{static.categoryProduct.inactive}</b>
+    .col-6 
+        .card.mb-4 
+            .card-header Sản phẩm 
+            .card-body 
+                p Số lượng: <b>2</b>
+                p Hoạt động <b>5</b>
+                p Dừng hoạt động <b>5</b>
+    .col-6 
+        .card.mb-4 
+            .card-header Tài khoản admin
+            .card-body 
+                p Số lượng: <b>5</b>
+                p Hoạt động <b>3</b>
+                p Dừng hoạt động <b>2</b>
+    .col-6 
+        .card.mb-4 
+            .card-header Tài khoản client
+            .card-body 
+                p Số lượng: <b>5</b>
+                p Hoạt động <b>3</b>
+                p Dừng hoạt động <b>2</b>

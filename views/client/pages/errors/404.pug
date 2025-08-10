@@ -1,0 +1,10 @@
+extends ../../layouts/default.pug
+
+block main
+  .container.text-center.mt-5
+    h1.text-danger 404 - Không tìm thấy trang
+    p Trang bạn tìm không tồn tại hoặc đã bị xóa.
+
+    button.btn.btn-primary.mt-3(type="button", onclick="history.back()")
+      i.fas.fa-arrow-left.me-2
+      | Trở lại

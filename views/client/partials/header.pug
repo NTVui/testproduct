@@ -1,13 +1,14 @@
 include ../mixins/sub-menu.pug
 
 header.header
+  
   .container
     .row.align-items-center.justify-content-between
       // 🌟 Logo
       .col-md-3.col-6
         .inner-logo
           a(href="/")
-            img(src="/img/logo.png", alt="Logo")
+            img(src=settingGeneral.logo, alt="Logo")
 
       // 🔍 Search Form
       .col-md-5.col-12.mt-2.mt-md-0
@@ -35,4 +36,9 @@ header.header
                 a(href="/user/login") Đăng nhập
             else
               li
+                a(href="/user/info") #{user.fullName}
+              li
+                a(href="/chat") Chat
+              li
                 a(href="/user/logout") Đăng xuất
+              

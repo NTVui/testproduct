@@ -1,0 +1,42 @@
+extends ../../layouts/default.pug
+include ../../mixins/box-head.pug
+
+block main
+  
+  .container.my-3 
+    include ../../partials/list-btn-user.pug
+    .row 
+      .col-12 
+        +box-head(pageTitle)
+    .row 
+        .col-12
+            .chat(my-id = user.id)
+                // Phần đầu chat (header)
+                //- .inner-head
+                //- //- .inner-avatar(src=chatPartner.avatar alt="Avatar")
+                //- .inner-name #{chatPartner.name}
+
+                // Phần nội dung chat
+                .inner-body
+                    each chat in chats
+                        div(class= (chat.infoUser.id == user.id ? "inner-outgoing" : "inner-incoming"))
+                            if(chat.infoUser.id != user.id)
+                                .inner-name #{chat.infoUser.fullName}
+                            .inner-content #{chat.content}
+                        
+                    div(class="inner-list-typing")
+                        
+                // Phần nhập tin nhắn
+                .inner-foot
+                    form.inner-form(action="")
+                        input(type="text" name="content" placeholder="Nhập nội dung...")
+                        span(class="button-icon btn btn-light mx-2") 
+                            <i class="fa-regular fa-face-smile"></i>
+                        button(type="submit")
+                            i(class="fas fa-paper-plane")
+    div(class="tooltip" role="tooltip")
+        emoji-picker
+    
+    //-div(class="custom-file-container" data-upload-id="upload-image")
+
+
